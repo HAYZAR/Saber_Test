@@ -1,196 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Repaso SABER Física · Mecánica</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Atlas SABER Física · Mecánica</title>
   <script>
     window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
-    :root{
-      --ink:#0f172a;--muted:#475569;--bg:#f8fafc;--card:#ffffff;--line:#cbd5e1;
-      --pri:#0b3a89;--pri2:#1d4ed8;--ok:#14532d;--accent:#d97706;
-      --r:14px;--sh:0 12px 28px rgba(15,23,42,.08);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
-    .hero{background:linear-gradient(135deg,#0b3a89,#1e3a8a 55%,#2563eb);color:#fff;border-radius:20px;padding:26px 24px;box-shadow:var(--sh)}
-    .hero h1{margin:.1rem 0;font-size:1.8rem}
-    .hero p{margin:.35rem 0 0;max-width:900px;opacity:.95;line-height:1.5}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .chip{background:rgba(255,255,255,.16);padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:600}
-
-    .comp-grid{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
-    .comp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
-    .comp h3{margin:0 0 4px;font-size:1rem;color:var(--pri)}
-    .comp p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.45}
-    .comp.active{border-color:#93c5fd;background:#eff6ff}
-    .pill{display:inline-block;margin-bottom:6px;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:2px 8px;font-size:.7rem;font-weight:700}
-
-    .section{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
-    .section header{padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8fafc)}
-    .section h2{margin:0;color:var(--pri);font-size:1.15rem}
-    .section p{margin:.35rem 0 0;color:var(--muted);font-size:.9rem}
-    .content{padding:16px}
-
-    .topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-bottom:14px}
-    .topic{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}
-    .topic h4{margin:0 0 5px;font-size:.93rem;color:#1e3a8a}
-    .topic ul{margin:0;padding-left:17px;color:#334155;font-size:.84rem;line-height:1.45}
-
-    .eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-    .eq{background:#f8fafc;border:1px solid #dbeafe;border-radius:10px;padding:12px}
-    .eq h5{margin:0 0 8px;font-size:.84rem;color:#1e3a8a}
-    .eq .math{font-size:1.03rem;overflow:auto}
-
-    table{width:100%;border-collapse:collapse;font-size:.86rem}
-    th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
-    thead th{background:#eff6ff;color:#1e3a8a}
-    tbody tr:nth-child(even){background:#f8fafc}
-
-    .fig-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:12px}
-    figure{margin:0;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff}
-    figcaption{margin-top:8px;font-size:.8rem;color:var(--muted)}
-    svg{width:100%;height:auto;background:#ffffff}
-
-    .note{margin-top:14px;padding:11px 12px;border-left:4px solid var(--accent);background:#fffbeb;border-radius:8px;color:#78350f;font-size:.85rem}
-    .footer{margin-top:16px;color:#64748b;font-size:.78rem}
+    :root{--bg:#f5f7fb;--card:#fff;--ink:#0f172a;--mut:#475569;--pri:#123a8d;--line:#d8e0ef;--ok:#0f766e;--warn:#92400e;--r:14px;--sh:0 10px 28px rgba(15,23,42,.08)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+    .app{max-width:1180px;margin:auto;padding:20px 14px 40px}
+    .hero{background:linear-gradient(130deg,#0f2f72,#1f4fb0 55%,#2b6de5);color:#fff;border-radius:20px;padding:24px;box-shadow:var(--sh)}
+    .hero h1{margin:0 0 8px;font-size:1.8rem}.hero p{margin:0;line-height:1.5;max-width:900px}
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:14px;margin-top:14px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+    .side{padding:14px}.side h3{margin:2px 0 10px;color:var(--pri);font-size:.98rem}
+    .c-btn{width:100%;text-align:left;border:1px solid var(--line);background:#fff;padding:10px 11px;border-radius:10px;margin-bottom:8px;cursor:pointer;font-weight:600;color:#1e3a8a}
+    .c-btn.active{background:#e8f0ff;border-color:#93b4f0}
+    .c-btn small{display:block;color:var(--mut);font-weight:500;margin-top:2px}
+    .content{padding:14px}
+    .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin-bottom:10px}
+    .card h2{margin:0 0 5px;font-size:1.08rem;color:var(--pri)}.card p{margin:0;color:var(--mut);font-size:.92rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+    .k{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fafcff}.k h4{margin:0 0 6px;font-size:.92rem;color:#1d4ed8}.k ul{margin:0;padding-left:18px;color:#334155;font-size:.85rem;line-height:1.45}
+    .eq{background:#f8fbff;border:1px solid #cfe0ff;border-radius:10px;padding:10px;overflow:auto}.eq b{display:block;color:#1e3a8a;margin-bottom:5px}
+    table{width:100%;border-collapse:collapse;font-size:.86rem}th,td{border:1px solid var(--line);padding:8px;text-align:left}th{background:#eef4ff;color:#1e3a8a}
+    .fig{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:10px;margin-top:10px}.f{border:1px solid var(--line);border-radius:10px;padding:8px}.f svg{width:100%;height:auto}.f figcaption{font-size:.79rem;color:var(--mut)}
+    .example{background:#f0fdf4;border-left:4px solid #16a34a;padding:10px;border-radius:8px;font-size:.86rem;line-height:1.45;color:#14532d;margin-top:10px}
+    .next{background:#fffbeb;border-left:4px solid #f59e0b;padding:10px;border-radius:8px;color:var(--warn);font-size:.84rem}
+    .hidden{display:none}
+    @media (max-width:900px){.layout{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <main class="app">
     <section class="hero">
-      <h1>Repaso rápido de Física SABER 11</h1>
-      <p>
-        Iniciamos con el componente de <strong>Mecánica</strong> en formato de consulta: conceptos clave,
-        ecuaciones visibles, tabla de unidades SI y figuras tipo editorial para estudiar antes de la prueba.
-      </p>
-      <div class="chips">
-        <span class="chip">Formato consulta</span>
-        <span class="chip">Ecuaciones en MathJax</span>
-        <span class="chip">Figuras SVG estilo técnico</span>
-      </div>
+      <h1>Atlas de repaso rápido · Física SABER 11</h1>
+      <p>Base de aplicaciones de consulta por componente. <strong>Primera entrega: Mecánica</strong> con estética editorial, fórmulas claras y material visual para estudiar en minutos.</p>
     </section>
 
-    <section class="comp-grid" aria-label="Componentes">
-      <article class="comp active"><span class="pill">En desarrollo</span><h3>Mecánica</h3><p>Cinemática, dinámica, energía, momento lineal y circular.</p></article>
-      <article class="comp"><h3>Termodinámica</h3><p>Estructura pendiente: se aplicará la misma plantilla ajustada.</p></article>
-      <article class="comp"><h3>Ondas</h3><p>Estructura pendiente: se aplicará la misma plantilla ajustada.</p></article>
-      <article class="comp"><h3>Electricidad y magnetismo</h3><p>Estructura pendiente: se aplicará la misma plantilla ajustada.</p></article>
-    </section>
+    <div class="layout">
+      <aside class="panel side">
+        <h3>Componentes</h3>
+        <button class="c-btn active" data-screen="mec">⚙️ Mecánica<small>Disponible</small></button>
+        <button class="c-btn" data-screen="ter">🌡️ Termodinámica<small>Plantilla preparada</small></button>
+        <button class="c-btn" data-screen="ond">〰️ Ondas<small>Plantilla preparada</small></button>
+        <button class="c-btn" data-screen="ele">⚡ Electricidad y magnetismo<small>Plantilla preparada</small></button>
+      </aside>
 
-    <section class="section">
-      <header>
-        <h2>⚙️ Mecánica · mapa de repaso</h2>
-        <p>Bloques de contenido alineados con problemas frecuentes de pruebas tipo SABER.</p>
-      </header>
-      <div class="content">
-        <div class="topics">
-          <article class="topic"><h4>1) Cinemática</h4><ul><li>MRU y MRUA</li><li>Gráficas $x-t$, $v-t$, $a-t$</li><li>Caída libre y tiro parabólico</li></ul></article>
-          <article class="topic"><h4>2) Dinámica</h4><ul><li>Leyes de Newton</li><li>Diagrama de cuerpo libre</li><li>Fricción y tensión</li></ul></article>
-          <article class="topic"><h4>3) Energía y trabajo</h4><ul><li>Trabajo de una fuerza</li><li>Energía cinética y potencial</li><li>Conservación de energía mecánica</li></ul></article>
-          <article class="topic"><h4>4) Cantidad de movimiento</h4><ul><li>Impulso</li><li>Colisiones elásticas/inelásticas</li><li>Conservación del momento</li></ul></article>
+      <section class="panel content">
+        <div id="mec-screen">
+          <article class="card">
+            <h2>Mecánica · vista de consulta</h2>
+            <p>Resumen por conceptos, ecuaciones, magnitudes SI y figuras clave (tipo técnico) para resolver preguntas frecuentes de cinemática y dinámica.</p>
+            <div class="grid">
+              <section class="k"><h4>Cinemática</h4><ul><li>MRU, MRUA y caída libre.</li><li>Lectura de pendiente/área en gráficas.</li><li>Variables: $x, v, a, t$.</li></ul></section>
+              <section class="k"><h4>Dinámica</h4><ul><li>Leyes de Newton.</li><li>Diagrama de cuerpo libre.</li><li>Fricción, tensión y normal.</li></ul></section>
+              <section class="k"><h4>Energía</h4><ul><li>Trabajo y potencia.</li><li>$K$, $U$ y conservación.</li><li>Interpretación de transformaciones.</li></ul></section>
+              <section class="k"><h4>Momento lineal</h4><ul><li>Impulso y colisiones.</li><li>Conservación de $\vec p$.</li><li>Sistemas aislados.</li></ul></section>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Ecuaciones fundamentales</h2>
+            <div class="grid">
+              <div class="eq"><b>MRUA</b>$$v=v_0+at \qquad x=x_0+v_0t+\frac{1}{2}at^2$$</div>
+              <div class="eq"><b>Newton</b>$$\sum\vec F=m\vec a$$</div>
+              <div class="eq"><b>Energía</b>$$E_m=K+U \qquad W=\Delta K$$</div>
+              <div class="eq"><b>Momento e impulso</b>$$\vec p=m\vec v \qquad \vec J=\Delta\vec p$$</div>
+            </div>
+            <div class="example"><strong>Mini-ejemplo:</strong> si un cuerpo parte del reposo y acelera $2\,m/s^2$ durante $4\,s$, entonces $v=8\,m/s$ y $x=16\,m$ usando las ecuaciones de MRUA.</div>
+          </article>
+
+          <article class="card">
+            <h2>Tabla de magnitudes (SI)</h2>
+            <table>
+              <thead><tr><th>Magnitud</th><th>Símbolo</th><th>Unidad</th><th>Dimensión</th></tr></thead>
+              <tbody>
+                <tr><td>Distancia</td><td>$x$</td><td>m</td><td>$L$</td></tr>
+                <tr><td>Tiempo</td><td>$t$</td><td>s</td><td>$T$</td></tr>
+                <tr><td>Velocidad</td><td>$v$</td><td>m/s</td><td>$LT^{-1}$</td></tr>
+                <tr><td>Aceleración</td><td>$a$</td><td>m/s²</td><td>$LT^{-2}$</td></tr>
+                <tr><td>Fuerza</td><td>$F$</td><td>N</td><td>$MLT^{-2}$</td></tr>
+                <tr><td>Energía</td><td>$E$</td><td>J</td><td>$ML^2T^{-2}$</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card">
+            <h2>Figuras y gráficos técnicos</h2>
+            <div class="fig">
+              <figure class="f">
+                <svg viewBox="0 0 360 210" aria-label="gráfica posición-tiempo">
+                  <line x1="35" y1="175" x2="330" y2="175" stroke="#111"/><line x1="35" y1="175" x2="35" y2="25" stroke="#111"/>
+                  <path d="M55 160 L305 55" stroke="#1d4ed8" stroke-width="3" fill="none"/>
+                  <path d="M55 168 Q150 166 305 38" stroke="#ea580c" stroke-width="3" fill="none"/>
+                  <text x="311" y="59" fill="#1d4ed8" font-size="12">MRU</text><text x="309" y="35" fill="#ea580c" font-size="12">MRUA</text>
+                </svg>
+                <figcaption>En $x$ vs. $t$, la pendiente representa la velocidad.</figcaption>
+              </figure>
+              <figure class="f">
+                <svg viewBox="0 0 360 210" aria-label="diagrama de fuerzas">
+                  <line x1="20" y1="170" x2="340" y2="170" stroke="#64748b"/>
+                  <rect x="138" y="112" width="84" height="58" fill="#dbeafe" stroke="#1d4ed8"/>
+                  <line x1="180" y1="112" x2="180" y2="58" stroke="#16a34a" stroke-width="3"/>
+                  <line x1="180" y1="170" x2="180" y2="205" stroke="#dc2626" stroke-width="3"/>
+                  <line x1="222" y1="142" x2="286" y2="142" stroke="#7c3aed" stroke-width="3"/>
+                  <line x1="138" y1="142" x2="76" y2="142" stroke="#ea580c" stroke-width="3"/>
+                  <text x="186" y="62" font-size="12" fill="#16a34a">N</text><text x="186" y="198" font-size="12" fill="#dc2626">mg</text>
+                </svg>
+                <figcaption>Diagrama de cuerpo libre para descomponer fuerzas.</figcaption>
+              </figure>
+              <figure class="f">
+                <svg viewBox="0 0 360 210" aria-label="energía cinética y potencial">
+                  <line x1="35" y1="175" x2="330" y2="175" stroke="#111"/><line x1="35" y1="175" x2="35" y2="25" stroke="#111"/>
+                  <path d="M50 165 C125 130,200 90,300 45" stroke="#0ea5e9" stroke-width="3" fill="none"/>
+                  <path d="M50 45 C125 90,200 130,300 165" stroke="#ef4444" stroke-width="3" fill="none"/>
+                  <line x1="50" y1="106" x2="300" y2="106" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/>
+                </svg>
+                <figcaption>Intercambio $K \leftrightarrow U$ con $E_m$ constante.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="next">Cuando confirmes este formato final, replicamos exactamente la misma arquitectura para <strong>Termodinámica, Ondas y Electricidad/Magnetismo</strong> con su contenido específico.</article>
         </div>
 
-        <div class="eq-grid">
-          <article class="eq"><h5>MRUA</h5><div class="math">$$v=v_0+at \qquad x=x_0+v_0t+\frac{1}{2}at^2$$</div></article>
-          <article class="eq"><h5>2ª Ley de Newton</h5><div class="math">$$\sum \vec{F}=m\vec{a}$$</div></article>
-          <article class="eq"><h5>Trabajo y energía</h5><div class="math">$$W=\Delta K=\frac{1}{2}mv_f^2-\frac{1}{2}mv_i^2$$</div></article>
-          <article class="eq"><h5>Impulso y momento</h5><div class="math">$$\vec{J}=\Delta\vec{p}=\int \vec{F}\,dt$$</div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <header><h2>📊 Tabla de magnitudes y unidades (SI)</h2><p>Referencia rápida para lectura de enunciados y análisis dimensional.</p></header>
-      <div class="content">
-        <table aria-label="Tabla SI de mecánica">
-          <thead><tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Dimensión base</th></tr></thead>
-          <tbody>
-            <tr><td>Posición / distancia</td><td>$x,\,d$</td><td>metro (m)</td><td>$L$</td></tr>
-            <tr><td>Tiempo</td><td>$t$</td><td>segundo (s)</td><td>$T$</td></tr>
-            <tr><td>Velocidad</td><td>$v$</td><td>m/s</td><td>$LT^{-1}$</td></tr>
-            <tr><td>Aceleración</td><td>$a$</td><td>m/s²</td><td>$LT^{-2}$</td></tr>
-            <tr><td>Fuerza</td><td>$F$</td><td>newton (N)</td><td>$MLT^{-2}$</td></tr>
-            <tr><td>Energía / trabajo</td><td>$E,\,W$</td><td>joule (J)</td><td>$ML^2T^{-2}$</td></tr>
-            <tr><td>Cantidad de movimiento</td><td>$p$</td><td>kg·m/s</td><td>$MLT^{-1}$</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section">
-      <header><h2>🧩 Figuras de apoyo (estilo técnico)</h2><p>Visuales limpios para lectura conceptual y relación ecuación-gráfica.</p></header>
-      <div class="content">
-        <div class="fig-grid">
-          <figure>
-            <svg viewBox="0 0 380 220" role="img" aria-label="Gráficas de posición-tiempo">
-              <defs>
-                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0f172a"/></marker>
-              </defs>
-              <rect x="0" y="0" width="380" height="220" fill="#fff"/>
-              <line x1="40" y1="185" x2="340" y2="185" stroke="#0f172a" marker-end="url(#arr)"/>
-              <line x1="40" y1="185" x2="40" y2="25" stroke="#0f172a" marker-end="url(#arr)"/>
-              <text x="345" y="188" font-size="12" fill="#0f172a">t</text>
-              <text x="30" y="24" font-size="12" fill="#0f172a">x</text>
-              <path d="M60 165 L310 55" stroke="#1d4ed8" stroke-width="3" fill="none"/>
-              <path d="M60 170 Q150 165 305 45" stroke="#d97706" stroke-width="3" fill="none"/>
-              <text x="248" y="70" fill="#1d4ed8" font-size="12">MRU</text>
-              <text x="250" y="45" fill="#d97706" font-size="12">MRUA</text>
-            </svg>
-            <figcaption>Relación gráfica: la pendiente en $x-t$ es la velocidad.</figcaption>
-          </figure>
-
-          <figure>
-            <svg viewBox="0 0 380 220" role="img" aria-label="Diagrama de cuerpo libre">
-              <rect x="0" y="0" width="380" height="220" fill="#fff"/>
-              <line x1="20" y1="175" x2="360" y2="175" stroke="#64748b" stroke-width="2"/>
-              <rect x="145" y="120" width="90" height="55" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
-              <line x1="190" y1="120" x2="190" y2="65" stroke="#16a34a" stroke-width="3"/>
-              <polygon points="190,58 184,70 196,70" fill="#16a34a"/>
-              <line x1="190" y1="175" x2="190" y2="212" stroke="#dc2626" stroke-width="3"/>
-              <polygon points="190,214 184,202 196,202" fill="#dc2626"/>
-              <line x1="235" y1="148" x2="298" y2="148" stroke="#7c3aed" stroke-width="3"/>
-              <polygon points="304,148 292,142 292,154" fill="#7c3aed"/>
-              <line x1="145" y1="148" x2="86" y2="148" stroke="#ea580c" stroke-width="3"/>
-              <polygon points="80,148 92,142 92,154" fill="#ea580c"/>
-              <text x="196" y="80" font-size="12" fill="#16a34a">N</text>
-              <text x="198" y="204" font-size="12" fill="#dc2626">mg</text>
-              <text x="303" y="144" font-size="12" fill="#7c3aed">F</text>
-              <text x="64" y="144" font-size="12" fill="#ea580c">f</text>
-            </svg>
-            <figcaption>Diagrama de fuerzas para aplicar $\sum F_x$ y $\sum F_y$.</figcaption>
-          </figure>
-
-          <figure>
-            <svg viewBox="0 0 380 220" role="img" aria-label="Energía potencial y cinética">
-              <rect x="0" y="0" width="380" height="220" fill="#fff"/>
-              <line x1="35" y1="185" x2="340" y2="185" stroke="#0f172a"/>
-              <line x1="35" y1="185" x2="35" y2="25" stroke="#0f172a"/>
-              <path d="M50 175 C120 130,190 90,300 45" stroke="#0ea5e9" stroke-width="3" fill="none"/>
-              <path d="M50 45 C120 90,190 130,300 175" stroke="#ef4444" stroke-width="3" fill="none"/>
-              <line x1="50" y1="112" x2="300" y2="112" stroke="#16a34a" stroke-dasharray="6 4" stroke-width="2"/>
-              <text x="306" y="50" fill="#0ea5e9" font-size="12">$K$</text>
-              <text x="306" y="173" fill="#ef4444" font-size="12">$U$</text>
-              <text x="244" y="106" fill="#16a34a" font-size="12">$E_m$ constante</text>
-            </svg>
-            <figcaption>Intercambio $K \leftrightarrow U$ con conservación de energía mecánica.</figcaption>
-          </figure>
-        </div>
-
-        <div class="note">
-          Siguiente iteración sugerida: validar esta estructura visual/contenido y replicar el mismo patrón para
-          <strong>termodinámica, ondas y electricidad-magnetismo</strong>, manteniendo consistencia editorial.
-        </div>
-        <div class="footer">Versión inicial · abril 2026.</div>
-      </div>
-    </section>
+        <div id="ter-screen" class="hidden"><article class="card"><h2>Termodinámica</h2><p>Componente reservado: se activará usando la misma estructura editorial aprobada para Mecánica.</p></article></div>
+        <div id="ond-screen" class="hidden"><article class="card"><h2>Ondas</h2><p>Componente reservado: se activará usando la misma estructura editorial aprobada para Mecánica.</p></article></div>
+        <div id="ele-screen" class="hidden"><article class="card"><h2>Electricidad y magnetismo</h2><p>Componente reservado: se activará usando la misma estructura editorial aprobada para Mecánica.</p></article></div>
+      </section>
+    </div>
   </main>
+
+  <script>
+    const map = { mec:'mec-screen', ter:'ter-screen', ond:'ond-screen', ele:'ele-screen' };
+    document.querySelectorAll('.c-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.c-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        Object.values(map).forEach(id => document.getElementById(id).classList.add('hidden'));
+        document.getElementById(map[btn.dataset.screen]).classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
