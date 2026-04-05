@@ -234,20 +234,29 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
   .ctx-tbl th,.ctx-tbl td{padding:5px 7px;}
 }
 
-/* STUDENT MODAL */
-.st-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:900;display:flex;align-items:center;justify-content:center;padding:16px;}
-.st-modal-ov.hidden{display:none;}
-.st-modal{background:#fff;border-radius:14px;padding:28px 24px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.22);}
-.st-modal h3{font-size:1.05rem;font-weight:700;color:var(--pri);margin-bottom:4px;}
-.st-modal .st-sub{font-size:.8rem;color:var(--mut);margin-bottom:18px;}
-.st-fld{margin-bottom:13px;}
+/* STUDENT REGISTRATION CARD (home screen) */
+.reg-card{background:#fff;border-radius:14px;padding:22px 24px;box-shadow:var(--shad);border:2px solid var(--pri);margin-bottom:22px;}
+.reg-card-hd{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.reg-card-hd h3{font-size:1rem;font-weight:700;color:var(--pri);}
+.reg-card .reg-sub{font-size:.78rem;color:var(--mut);margin-bottom:14px;}
+.st-fld{margin-bottom:12px;}
 .st-fld label{display:block;font-size:.78rem;font-weight:600;color:var(--txt);margin-bottom:5px;}
-.st-fld input,.st-fld select{width:100%;padding:9px 12px;border:1.5px solid var(--bdr);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .15s;}
-.st-fld input:focus,.st-fld select:focus{border-color:var(--pri);}
+.st-fld input{width:100%;padding:9px 12px;border:1.5px solid var(--bdr);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .15s;}
+.st-fld input:focus{border-color:var(--pri);}
 .st-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.st-modal-act{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;}
-.st-modal-act .btn-cancel{background:#f3f4f6;color:#374151;border:none;padding:9px 18px;border-radius:8px;font-size:.88rem;cursor:pointer;}
-.st-modal-act .btn-cancel:hover{background:#e5e7eb;}
+.reg-act{display:flex;justify-content:flex-end;margin-top:14px;}
+/* Registered badge (replaces form after login) */
+.reg-badge{background:var(--ok-bg);border:1.5px solid #86efac;border-radius:10px;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;}
+.hidden{display:none !important;}
+.reg-badge.hidden{display:none;}
+.reg-badge-info{display:flex;align-items:center;gap:9px;}
+.reg-badge-info .ico{font-size:1.3rem;}
+.reg-badge-name{font-weight:700;font-size:.95rem;color:var(--ok);}
+.reg-badge-meta{font-size:.75rem;color:#166534;}
+.reg-badge button{background:none;border:1.5px solid #86efac;border-radius:7px;padding:5px 12px;font-size:.76rem;color:#166534;cursor:pointer;white-space:nowrap;}
+.reg-badge button:hover{background:#dcfce7;}
+/* Lock overlay on module cards when not registered */
+.mod-card.locked{opacity:.45;cursor:not-allowed;pointer-events:none;}
 
 /* SHEETS STATUS */
 .sheets-status{margin-top:14px;padding:10px 14px;border-radius:8px;font-size:.82rem;text-align:center;}
@@ -279,27 +288,62 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 <!-- HOME -->
 <div id="screen-home">
 
+  <!-- REGISTRO DEL ESTUDIANTE (siempre visible hasta registrarse) -->
+  <div class="reg-card" id="reg-card">
+    <div class="reg-card-hd"><span style="font-size:1.3rem;">🎓</span><h3>Registro del estudiante</h3></div>
+    <p class="reg-sub">Completa tus datos para habilitar las pruebas. Los resultados se guardarán con tu nombre.</p>
+    <div class="st-fld">
+      <label>Nombre completo *</label>
+      <input type="text" id="st-nombre" placeholder="Ej. María Fernández García" autocomplete="name"/>
+    </div>
+    <div class="st-row">
+      <div class="st-fld">
+        <label>Código estudiantil</label>
+        <input type="text" id="st-codigo" placeholder="Ej. 2024015"/>
+      </div>
+      <div class="st-fld">
+        <label>Grado / Grupo *</label>
+        <input type="text" id="st-grado" placeholder="Ej. 11-A"/>
+      </div>
+    </div>
+    <div class="reg-act">
+      <button class="btn-p" onclick="registerStudent()">Ingresar y comenzar →</button>
+    </div>
+  </div>
+
+  <!-- BADGE cuando ya está registrado -->
+  <div class="reg-badge hidden" id="reg-badge">
+    <div class="reg-badge-info">
+      <span class="ico">🎓</span>
+      <div>
+        <div class="reg-badge-name" id="reg-badge-name"></div>
+        <div class="reg-badge-meta" id="reg-badge-meta"></div>
+      </div>
+    </div>
+    <button onclick="editStudent()">✏️ Editar</button>
+  </div>
+
   <div class="mod-title">
     <h2>Selecciona un módulo</h2>
     <p>Practica cada área de la física al estilo SABER 11 · 2 pruebas de 10 preguntas por tema</p>
   </div>
-  <div class="mod-grid">
-    <div class="mod-card av" onclick="openModule('mecanica')">
+  <div class="mod-grid" id="mod-grid">
+    <div class="mod-card av locked" id="mc-mecanica" onclick="openModule('mecanica')">
       <span class="bdg ba">Disponible</span>
       <div class="ico">⚙️</div><h3>Mecánica</h3>
       <p>Leyes de Newton, cinemática, energía, impulso y más · 200 preguntas</p>
     </div>
-    <div class="mod-card av" onclick="openModule('calor')">
+    <div class="mod-card av locked" id="mc-calor" onclick="openModule('calor')">
       <span class="bdg ba">Disponible</span>
       <div class="ico">🌡️</div><h3>Calor y Termodinámica</h3>
       <p>Temperatura, transferencia, calorimetría, cambios de fase · 100 preguntas</p>
     </div>
-    <div class="mod-card av" onclick="openModule('sonido')">
+    <div class="mod-card av locked" id="mc-sonido" onclick="openModule('sonido')">
       <span class="bdg ba">Disponible</span>
       <div class="ico">〰️</div><h3>Ondas</h3>
       <p>Vibraciones, sonido, Doppler, resonancia y más · 60 preguntas</p>
     </div>
-    <div class="mod-card av" onclick="openModule('electro')">
+    <div class="mod-card av locked" id="mc-electro" onclick="openModule('electro')">
       <span class="bdg ba">Disponible</span>
       <div class="ico">⚡</div><h3>Electricidad y Magnetismo</h3>
       <p>Electrostática, circuitos, magnetismo, inducción · 80 preguntas</p>
@@ -625,32 +669,6 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 
 </div><!-- end .main -->
 
-<!-- MODAL IDENTIFICACIÓN ESTUDIANTE -->
-<div class="st-modal-ov hidden" id="st-modal-ov">
-  <div class="st-modal">
-    <h3>👤 Identificación del estudiante</h3>
-    <p class="st-sub">Completa tus datos antes de iniciar la prueba.</p>
-    <div class="st-fld">
-      <label>Nombre completo *</label>
-      <input type="text" id="st-nombre" placeholder="Ej. María Fernández García" autocomplete="name"/>
-    </div>
-    <div class="st-row">
-      <div class="st-fld">
-        <label>Código estudiantil</label>
-        <input type="text" id="st-codigo" placeholder="Ej. 2024015"/>
-      </div>
-      <div class="st-fld">
-        <label>Grado / Grupo *</label>
-        <input type="text" id="st-grado" placeholder="Ej. 11-A"/>
-      </div>
-    </div>
-    <div class="st-modal-act">
-      <button class="btn-cancel" onclick="closeStudentModal()">Cancelar</button>
-      <button class="btn-p" onclick="confirmStudent()">Comenzar ▶</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const MODULES = {
@@ -841,35 +859,33 @@ function selTema(mod,t){
   updateModuleUI(mod);
 }
 
-// ─── STUDENT MODAL ───────────────────────────────────────────────────────────
-function showStudentModal(mod){
-  pendingMod=mod;
-  document.getElementById('st-nombre').value=studentName;
-  document.getElementById('st-codigo').value=studentCode;
-  document.getElementById('st-grado').value=studentGrado;
-  document.getElementById('st-modal-ov').classList.remove('hidden');
-  setTimeout(()=>document.getElementById('st-nombre').focus(),100);
-}
-function closeStudentModal(){
-  document.getElementById('st-modal-ov').classList.add('hidden');
-  pendingMod=null;
-}
-function confirmStudent(){
+// ─── STUDENT REGISTRATION (home screen) ─────────────────────────────────────
+function registerStudent(){
   const name=document.getElementById('st-nombre').value.trim();
   const grado=document.getElementById('st-grado').value.trim();
-  if(!name){alert('Por favor ingresa tu nombre completo.');return;}
-  if(!grado){alert('Por favor ingresa tu grado/grupo.');return;}
+  if(!name){alert('Por favor ingresa tu nombre completo.');document.getElementById('st-nombre').focus();return;}
+  if(!grado){alert('Por favor ingresa tu grado/grupo.');document.getElementById('st-grado').focus();return;}
   studentName=name;
   studentCode=document.getElementById('st-codigo').value.trim();
   studentGrado=grado;
-  document.getElementById('st-modal-ov').classList.add('hidden');
-  const mod=pendingMod; pendingMod=null;
-  _doStartQuiz(mod);
+  // Show badge, hide form
+  document.getElementById('reg-card').classList.add('hidden');
+  document.getElementById('reg-badge').classList.remove('hidden');
+  document.getElementById('reg-badge-name').textContent=studentName;
+  document.getElementById('reg-badge-meta').textContent=(studentCode?studentCode+' · ':'')+studentGrado;
+  // Unlock all module cards
+  document.querySelectorAll('.mod-card.locked').forEach(c=>c.classList.remove('locked'));
+}
+function editStudent(){
+  // Re-lock modules, show form again
+  document.querySelectorAll('#mc-mecanica,#mc-calor,#mc-sonido,#mc-electro').forEach(c=>c.classList.add('locked'));
+  document.getElementById('reg-badge').classList.add('hidden');
+  document.getElementById('reg-card').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('st-nombre').focus(),50);
 }
 
 // ─── QUIZ ────────────────────────────────────────────────────────────────────
 function startQuiz(mod){
-  if(!studentName){showStudentModal(mod);return;}
   _doStartQuiz(mod);
 }
 function _doStartQuiz(mod){
