@@ -91,13 +91,42 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 .part-row .pnum{font-weight:700;color:var(--pri);min-width:68px;}
 .part-row .ptxt{color:var(--mut);}
 
-/* QUIZ */
+/* QUIZ LAYOUT */
+.quiz-layout{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:start;}
+.quiz-sidebar{display:flex;flex-direction:column;gap:10px;position:sticky;top:10px;}
+.qsb-card{background:var(--card);border-radius:var(--rad);padding:14px;box-shadow:var(--shad);}
+.qsb-card h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-bottom:8px;}
+.qsb-prog-bar{height:7px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-bottom:5px;}
+.qsb-prog-fill{height:100%;background:var(--acc);border-radius:99px;transition:width .4s;}
+.qsb-prog-lbl{font-size:.72rem;color:var(--mut);text-align:right;}
+/* palette */
+.q-palette{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:8px;}
+.qp-btn{width:100%;aspect-ratio:1;border-radius:7px;border:2px solid #d1d5db;background:#fff;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;color:#374151;}
+.qp-btn.current{background:var(--acc);border-color:var(--acc);color:#fff;}
+.qp-btn.answered{background:var(--pri);border-color:var(--pri);color:#fff;}
+.qp-btn.answered:hover{background:var(--pri-dk);}
+.qp-btn.current:hover{background:var(--acc-dk);}
+.palette-legend{display:flex;flex-direction:column;gap:4px;font-size:.68rem;color:var(--mut);}
+.pl-item{display:flex;align-items:center;gap:5px;}
+.pl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.pl-dot.current{background:var(--acc);}
+.pl-dot.answered{background:var(--pri);}
+.pl-dot.unanswered{background:#e5e7eb;border:1px solid #d1d5db;}
+/* submit button in sidebar */
+.btn-submit{width:100%;padding:11px;background:#c0392b;color:#fff;border:none;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s;}
+.btn-submit:hover{background:#922b21;}
+/* quiz top bar (inside main panel) */
 .quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;flex-wrap:wrap;gap:5px;}
 .qcnt{font-size:.8rem;color:var(--mut);}
 .qsc{font-size:.8rem;font-weight:700;background:#dbeafe;color:var(--pri);padding:3px 10px;border-radius:99px;}
 .pbar{height:6px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-bottom:7px;}
 .pfill{height:100%;background:var(--acc);border-radius:99px;transition:width .4s;}
 .pbar-lbl{font-size:.7rem;color:var(--mut);margin-bottom:12px;text-align:right;}
+@media(max-width:680px){
+  .quiz-layout{grid-template-columns:1fr;}
+  .quiz-sidebar{position:static;flex-direction:row;flex-wrap:wrap;}
+  .qsb-card{flex:1;min-width:180px;}
+}
 
 /* Context block - always visible, with table support */
 .ctx-blk{background:#eff6ff;border-left:4px solid var(--pri);border-radius:0 var(--rad) var(--rad) 0;padding:11px 15px;margin-bottom:12px;font-size:.84rem;color:#1e40af;line-height:1.6;}
@@ -204,6 +233,35 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
   .ctx-tbl{font-size:.75rem;}
   .ctx-tbl th,.ctx-tbl td{padding:5px 7px;}
 }
+
+/* STUDENT MODAL */
+.st-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:900;display:flex;align-items:center;justify-content:center;padding:16px;}
+.st-modal-ov.hidden{display:none;}
+.st-modal{background:#fff;border-radius:14px;padding:28px 24px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.22);}
+.st-modal h3{font-size:1.05rem;font-weight:700;color:var(--pri);margin-bottom:4px;}
+.st-modal .st-sub{font-size:.8rem;color:var(--mut);margin-bottom:18px;}
+.st-fld{margin-bottom:13px;}
+.st-fld label{display:block;font-size:.78rem;font-weight:600;color:var(--txt);margin-bottom:5px;}
+.st-fld input,.st-fld select{width:100%;padding:9px 12px;border:1.5px solid var(--bdr);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .15s;}
+.st-fld input:focus,.st-fld select:focus{border-color:var(--pri);}
+.st-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.st-modal-act{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;}
+.st-modal-act .btn-cancel{background:#f3f4f6;color:#374151;border:none;padding:9px 18px;border-radius:8px;font-size:.88rem;cursor:pointer;}
+.st-modal-act .btn-cancel:hover{background:#e5e7eb;}
+
+/* SHEETS STATUS */
+.sheets-status{margin-top:14px;padding:10px 14px;border-radius:8px;font-size:.82rem;text-align:center;}
+.sheets-status.loading{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.sheets-status.ok{background:var(--ok-bg);color:var(--ok);border:1px solid #86efac;}
+.sheets-status.error{background:var(--err-bg);color:var(--err);border:1px solid #fca5a5;}
+.sheets-status.hidden{display:none;}
+
+/* STUDENT BANNER in results */
+.st-banner{background:var(--pri);color:#fff;border-radius:9px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.st-banner .st-ico{font-size:1.2rem;}
+.st-banner .st-nm{font-weight:700;font-size:.95rem;}
+.st-banner .st-meta{font-size:.75rem;opacity:.85;}
+
 </style>
 </head>
 <body>
@@ -220,6 +278,7 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 
 <!-- HOME -->
 <div id="screen-home">
+
   <div class="mod-title">
     <h2>Selecciona un módulo</h2>
     <p>Practica cada área de la física al estilo SABER 11 · 2 pruebas de 10 preguntas por tema</p>
@@ -446,28 +505,55 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 <!-- QUIZ -->
 <div id="screen-quiz" style="display:none;">
   <button class="back-btn" onclick="exitQuiz()">← Salir</button>
-  <div class="quiz-top">
-    <span class="qcnt" id="qcnt">Pregunta 1 de 10</span>
-    <span class="qsc"  id="qsc">Aciertos: 0</span>
-  </div>
-  <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
-  <div class="pbar-lbl" id="pbar-lbl"></div>
-  <div class="ctx-blk" id="ctx-blk">
-    <div class="ctx-lbl" id="ctx-lbl"></div>
-    <div class="ctx-txt" id="ctx-txt"></div>
-  </div>
-  <div class="qcard">
-    <div class="qmeta">
-      <span class="qbdg t" id="qb-t"></span>
-      <span class="qbdg"   id="qb-c"></span>
-    </div>
-    <div class="qtxt" id="qtxt"></div>
-    <div class="opts" id="opts"></div>
-    <div class="fbbox" id="fbbox"></div>
-  </div>
-  <div class="qa">
-    <span class="hint" id="qhint">Selecciona una opción</span>
-    <button class="btn-p" id="btn-next" onclick="nextQ()" disabled>Siguiente →</button>
+
+  <div class="quiz-layout">
+    <!-- SIDEBAR -->
+    <aside class="quiz-sidebar">
+      <div class="qsb-card">
+        <h4>Progreso</h4>
+        <div class="qsb-prog-bar"><div class="qsb-prog-fill" id="sb-fill" style="width:0%"></div></div>
+        <div class="qsb-prog-lbl" id="sb-lbl">0 / 0 respondidas</div>
+      </div>
+      <div class="qsb-card">
+        <h4>Navegación de preguntas</h4>
+        <div class="q-palette" id="q-palette"></div>
+        <div class="palette-legend">
+          <div class="pl-item"><div class="pl-dot current"></div>Pregunta actual</div>
+          <div class="pl-item"><div class="pl-dot answered"></div>Respondida</div>
+          <div class="pl-item"><div class="pl-dot unanswered"></div>Sin responder</div>
+        </div>
+      </div>
+      <div class="qsb-card">
+        <button class="btn-submit" onclick="confirmSubmit()">✅ Entregar prueba</button>
+      </div>
+    </aside>
+
+    <!-- QUESTION PANEL -->
+    <main>
+      <div class="quiz-top">
+        <span class="qcnt" id="qcnt">Pregunta 1 de 10</span>
+        <span class="qsc"  id="qsc">Aciertos: 0</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
+      <div class="pbar-lbl" id="pbar-lbl"></div>
+      <div class="ctx-blk" id="ctx-blk">
+        <div class="ctx-lbl" id="ctx-lbl"></div>
+        <div class="ctx-txt" id="ctx-txt"></div>
+      </div>
+      <div class="qcard">
+        <div class="qmeta">
+          <span class="qbdg t" id="qb-t"></span>
+          <span class="qbdg"   id="qb-c"></span>
+        </div>
+        <div class="qtxt" id="qtxt"></div>
+        <div class="opts" id="opts"></div>
+        <div class="fbbox" id="fbbox"></div>
+      </div>
+      <div class="qa">
+        <span class="hint" id="qhint">Selecciona una opción</span>
+        <button class="btn-p" id="btn-next" onclick="nextQ()" disabled>Siguiente →</button>
+      </div>
+    </main>
   </div>
 </div>
 
@@ -491,6 +577,7 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
     <div class="fb-items" id="pr-fbs"></div>
     <div class="sec-ttl">Recomendaciones de mejora</div>
     <div class="recs" id="pr-recs"></div>
+    <div id="pr-sheets" class="sheets-status hidden"></div>
     <div class="pres-act">
       <button class="btn-s" onclick="exitQuiz()">Salir al módulo</button>
       <button class="btn-p" id="btn-cont" onclick="continueQuiz()">Siguiente prueba →</button>
@@ -501,6 +588,13 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 <!-- RESULTADOS FINALES -->
 <div id="screen-final" style="display:none;">
   <div class="fres-card">
+    <div class="st-banner" id="fr-st-banner" style="display:none;">
+      <span class="st-ico">🎓</span>
+      <div>
+        <div class="st-nm" id="fr-st-name"></div>
+        <div class="st-meta" id="fr-st-meta"></div>
+      </div>
+    </div>
     <div class="score-ring" id="fr-ring">
       <div class="sri">
         <span class="sn" id="fr-sc">0</span>
@@ -513,6 +607,7 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
       <div class="fs ok"><div class="fn" id="fr-ok">0</div><div class="fl">Correctas</div></div>
       <div class="fs bad"><div class="fn" id="fr-bad">0</div><div class="fl">Incorrectas</div></div>
       <div class="fs"><div class="fn" id="fr-pct">0%</div><div class="fl">Puntaje</div></div>
+      <div class="fs"><div class="fn" id="fr-time">—</div><div class="fl">Duración</div></div>
     </div>
     <div class="bkdn">
       <h4>Detalle por tema</h4>
@@ -520,6 +615,7 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
     </div>
     <div class="sec-ttl" style="margin-top:16px;">Recomendaciones finales</div>
     <div class="recs" id="fr-recs"></div>
+    <div id="fr-sheets" class="sheets-status hidden"></div>
     <div class="fres-act">
       <button class="btn-s" onclick="goHome()">Inicio</button>
       <button class="btn-p" onclick="exitQuiz()">Volver al módulo</button>
@@ -528,6 +624,32 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 </div>
 
 </div><!-- end .main -->
+
+<!-- MODAL IDENTIFICACIÓN ESTUDIANTE -->
+<div class="st-modal-ov hidden" id="st-modal-ov">
+  <div class="st-modal">
+    <h3>👤 Identificación del estudiante</h3>
+    <p class="st-sub">Completa tus datos antes de iniciar la prueba.</p>
+    <div class="st-fld">
+      <label>Nombre completo *</label>
+      <input type="text" id="st-nombre" placeholder="Ej. María Fernández García" autocomplete="name"/>
+    </div>
+    <div class="st-row">
+      <div class="st-fld">
+        <label>Código estudiantil</label>
+        <input type="text" id="st-codigo" placeholder="Ej. 2024015"/>
+      </div>
+      <div class="st-fld">
+        <label>Grado / Grupo *</label>
+        <input type="text" id="st-grado" placeholder="Ej. 11-A"/>
+      </div>
+    </div>
+    <div class="st-modal-act">
+      <button class="btn-cancel" onclick="closeStudentModal()">Cancelar</button>
+      <button class="btn-p" onclick="confirmStudent()">Comenzar ▶</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -578,6 +700,23 @@ const RECS = {
   }
 };
 
+/* ================================================================
+   CONFIGURACIÓN GOOGLE SHEETS
+   ================================================================
+   PASOS PARA ACTIVAR:
+   1. Abre la hoja de cálculo de resultados en Google Sheets.
+   2. Ve a Extensiones → Apps Script.
+   3. Borra el código de ejemplo y pega el contenido del
+      archivo "Apps_Script_Saber11.gs" (en la misma carpeta).
+   4. Clic en "Implementar" → "Nueva implementación":
+        Tipo: Aplicación web
+        Ejecutar como: Yo (hayzar@gmail.com)
+        Acceso: Cualquier persona
+   5. Autoriza los permisos y copia la URL de implementación.
+   6. Pégala en la constante SHEETS_ENDPOINT aquí abajo.
+   ================================================================ */
+const SHEETS_ENDPOINT='https://script.google.com/macros/s/AKfycbzQE78aSo3e1pTj8EDBWeCI1dSA25Y9gH01wxKIwgkdeaSjJ_MpOfDzlYU0O48xB_8Z2w/exec';
+
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let activeModule = null;
 let allParts = [];
@@ -589,6 +728,14 @@ let totalQ = 0;
 let partLog = [];
 let allPartsLog = [];
 let answered = false;
+
+// Student info
+let studentName = '';
+let studentCode = '';
+let studentGrado = '';
+let pendingMod = null;
+let quizStartTime = null;
+let partStartTime = null;  // timer per part
 
 // ─── SCREENS ─────────────────────────────────────────────────────────────────
 function show(id){
@@ -694,8 +841,38 @@ function selTema(mod,t){
   updateModuleUI(mod);
 }
 
+// ─── STUDENT MODAL ───────────────────────────────────────────────────────────
+function showStudentModal(mod){
+  pendingMod=mod;
+  document.getElementById('st-nombre').value=studentName;
+  document.getElementById('st-codigo').value=studentCode;
+  document.getElementById('st-grado').value=studentGrado;
+  document.getElementById('st-modal-ov').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('st-nombre').focus(),100);
+}
+function closeStudentModal(){
+  document.getElementById('st-modal-ov').classList.add('hidden');
+  pendingMod=null;
+}
+function confirmStudent(){
+  const name=document.getElementById('st-nombre').value.trim();
+  const grado=document.getElementById('st-grado').value.trim();
+  if(!name){alert('Por favor ingresa tu nombre completo.');return;}
+  if(!grado){alert('Por favor ingresa tu grado/grupo.');return;}
+  studentName=name;
+  studentCode=document.getElementById('st-codigo').value.trim();
+  studentGrado=grado;
+  document.getElementById('st-modal-ov').classList.add('hidden');
+  const mod=pendingMod; pendingMod=null;
+  _doStartQuiz(mod);
+}
+
 // ─── QUIZ ────────────────────────────────────────────────────────────────────
 function startQuiz(mod){
+  if(!studentName){showStudentModal(mod);return;}
+  _doStartQuiz(mod);
+}
+function _doStartQuiz(mod){
   const abbr=MOD_ID[mod];
   const data=MODULES[mod];
   const activeTab=document.querySelector('#ttabs-'+abbr+' .ttab.active');
@@ -710,6 +887,7 @@ function startQuiz(mod){
   partScore=0; totalScore=0;
   totalQ=allParts.reduce((s,p)=>s+p.questions.length,0);
   partLog=[]; allPartsLog=[]; answered=false;
+  quizStartTime=Date.now(); partStartTime=Date.now();
 
   show('screen-quiz');
   renderQ();
@@ -743,13 +921,47 @@ function safeCtxHTML(html){
 }
 
 // ─── RENDER QUESTION ─────────────────────────────────────────────────────────
-function renderQ(){
+// ─── PALETTE ─────────────────────────────────────────────────────────────────
+function updatePalette(){
+  const part=allParts[currentPart], tot=part.questions.length;
+  const answeredCount=partLog.length;
+  // sidebar progress
+  document.getElementById('sb-fill').style.width=(answeredCount/tot*100)+'%';
+  document.getElementById('sb-lbl').textContent=answeredCount+' / '+tot+' respondidas';
+  // palette buttons
+  const palette=document.getElementById('q-palette');
+  palette.innerHTML='';
+  for(let i=0;i<tot;i++){
+    const btn=document.createElement('button');
+    btn.textContent=i+1;
+    if(i<partLog.length) btn.className='qp-btn answered';
+    else if(i===currentQIdx) btn.className='qp-btn current';
+    else btn.className='qp-btn';
+    // allow jumping to already-answered questions for review
+    const idx=i;
+    if(i<=currentQIdx){
+      btn.onclick=()=>jumpToQ(idx);
+    }
+    palette.appendChild(btn);
+  }
+}
+
+function jumpToQ(idx){
+  // Jump to a question (only within answered range or current)
+  if(idx>currentQIdx) return;
+  currentQIdx=idx;
+  renderQ(true);  // true = review mode
+}
+
+function renderQ(reviewMode){
   const part=allParts[currentPart], q=part.questions[currentQIdx], tot=part.questions.length;
-  answered=false;
+  const isReview=(reviewMode===true)||(currentQIdx<partLog.length);
+  answered=isReview;
   document.getElementById('qcnt').textContent='Pregunta '+(currentQIdx+1)+' de '+tot;
   document.getElementById('qsc').textContent='Aciertos: '+partScore;
-  document.getElementById('pfill').style.width=(currentQIdx/tot*100)+'%';
+  document.getElementById('pfill').style.width=((currentQIdx)/tot*100)+'%';
   document.getElementById('pbar-lbl').textContent='Prueba '+(currentPart+1)+' de '+allParts.length+' · Tema '+part.tema+' Parte '+part.partNum;
+  updatePalette();
 
   // Always show context
   const ctxBlk=document.getElementById('ctx-blk');
@@ -774,18 +986,43 @@ function renderQ(){
   document.getElementById('qtxt').textContent=q.pregunta;
 
   const opts=document.getElementById('opts'); opts.innerHTML='';
+  const prevEntry=partLog[currentQIdx]; // exists if already answered
   ['A','B','C','D'].forEach(l=>{
     const btn=document.createElement('button');
     btn.className='obtn';
-    btn.onclick=()=>choose(l);
     btn.innerHTML='<span class="oltr">'+l+'</span><span>'+(q.opciones[l]||'')+'</span>';
+    if(prevEntry){
+      btn.disabled=true;
+      if(l===prevEntry.correct) btn.classList.add('ok');
+      else if(l===prevEntry.chosen&&!prevEntry.isOk) btn.classList.add('bad');
+    } else {
+      btn.onclick=()=>choose(l);
+    }
     opts.appendChild(btn);
   });
-  const fb=document.getElementById('fbbox'); fb.className='fbbox'; fb.innerHTML=''; fb.style.display='none';
-  document.getElementById('qhint').textContent='Selecciona una opción';
+
+  const fb=document.getElementById('fbbox');
+  if(prevEntry){
+    fb.style.display='block';
+    fb.className='fbbox show '+(prevEntry.isOk?'ok':'bad');
+    fb.innerHTML='';
+    const strong=document.createElement('strong');
+    strong.textContent=prevEntry.isOk?'✓ Correcto':'✗ Incorrecto · Clave: '+prevEntry.correct;
+    fb.appendChild(strong);
+    fb.appendChild(document.createTextNode(' — '+q.retroalimentacion));
+    document.getElementById('qhint').textContent=prevEntry.isOk?'¡Correcto!':'Respuesta incorrecta';
+  } else {
+    fb.className='fbbox'; fb.innerHTML=''; fb.style.display='none';
+    document.getElementById('qhint').textContent='Selecciona una opción';
+  }
   const bn=document.getElementById('btn-next');
-  bn.disabled=true;
-  bn.textContent=(currentQIdx+1<tot)?'Siguiente →':'Ver resultados de la prueba →';
+  bn.disabled=!prevEntry;
+  // label: if reviewing an answered q that isn't the last answered, say "Siguiente →"
+  const nextUnanswered=partLog.length; // index of first unanswered
+  if(currentQIdx<partLog.length-1) bn.textContent='Siguiente →';
+  else if(currentQIdx===partLog.length-1&&partLog.length<tot) bn.textContent='Siguiente sin responder →';
+  else if(currentQIdx+1<tot) bn.textContent='Siguiente →';
+  else bn.textContent='Ver resultados de la prueba →';
 }
 
 function choose(letter){
@@ -800,7 +1037,7 @@ function choose(letter){
   const fb=document.getElementById('fbbox'); fb.style.display='block';
   if(isOk){
     fb.className='fbbox show ok';
-    fb.textContent=''; 
+    fb.textContent='';
     const strong=document.createElement('strong'); strong.textContent='✓ Correcto';
     fb.appendChild(strong);
     fb.appendChild(document.createTextNode(' — '+q.retroalimentacion));
@@ -816,12 +1053,32 @@ function choose(letter){
   document.getElementById('qhint').textContent=isOk?'¡Correcto!':'Respuesta incorrecta';
   document.getElementById('btn-next').disabled=false;
   partLog.push({q,chosen:letter,correct,isOk});
+  updatePalette();
+  // update next button label
+  const tot=allParts[currentPart].questions.length;
+  document.getElementById('btn-next').textContent=(currentQIdx+1<tot)?'Siguiente →':'Ver resultados de la prueba →';
 }
 
 function nextQ(){
-  currentQIdx++;
-  if(currentQIdx>=allParts[currentPart].questions.length) showPartResults();
-  else renderQ();
+  const tot=allParts[currentPart].questions.length;
+  // If reviewing an answered q, jump to the next unanswered (=partLog.length)
+  if(currentQIdx<partLog.length-1){
+    currentQIdx++;
+    renderQ(true);
+  } else {
+    currentQIdx=partLog.length; // advance past all answered
+    if(currentQIdx>=tot) showPartResults();
+    else renderQ();
+  }
+}
+
+function confirmSubmit(){
+  const tot=allParts[currentPart].questions.length;
+  const done=partLog.length;
+  if(done<tot){
+    if(!confirm('Tienes '+(tot-done)+' pregunta(s) sin responder. ¿Deseas entregar de todas formas?')) return;
+  }
+  showPartResults();
 }
 
 // ─── PARTIAL RESULTS ─────────────────────────────────────────────────────────
@@ -834,14 +1091,39 @@ function lvlInfo(pct){
 
 function showPartResults(){
   const part=allParts[currentPart];
+  const answered=partLog.length;
+  const tot=part.questions.length;
   allPartsLog.push({partInfo:part,log:[...partLog],score:partScore});
   show('screen-partial');
-  const pct=Math.round(partScore/10*100);
+  const pct=answered>0?Math.round(partScore/answered*100):0;
   const ring=document.getElementById('pr-ring'); ring.style.setProperty('--pct',pct+'%');
   document.getElementById('pr-sc').textContent=partScore;
-  document.getElementById('pr-dn').textContent='/ 10';
+  document.getElementById('pr-dn').textContent='/ '+answered;
   document.getElementById('pr-ttl').textContent='Prueba '+(currentPart+1)+' completada';
   document.getElementById('pr-sub').textContent='Tema '+part.tema+' · Parte '+part.partNum+' – '+part.temaName;
+
+  // ── Send this part result to Sheets ──
+  if(studentName && SHEETS_ENDPOINT){
+    const MOD_NAME={mecanica:'Mecánica',calor:'Calor y Temperatura',sonido:'Sonido',electro:'Electricidad y Magnetismo'};
+    const elapsed=partStartTime?Math.floor((Date.now()-partStartTime)/1000):0;
+    const dur=Math.floor(elapsed/60)+'m '+('0'+(elapsed%60)).slice(-2)+'s';
+    const partRecord={
+      timestamp : new Date().toISOString(),
+      nombre    : studentName,
+      codigo    : studentCode||'',
+      grado     : studentGrado||'',
+      modulo    : MOD_NAME[activeModule]||activeModule,
+      prueba    : 'Prueba '+(currentPart+1)+' de '+allParts.length+' · Tema '+part.tema+' ('+part.temaName+') · Parte '+part.partNum,
+      preguntas : answered,
+      correctas : partScore,
+      porcentaje: pct,
+      nivel     : lvlInfo(pct).label,
+      duracion  : dur,
+      detalle   : partLog.map((e,i)=>'P'+(i+1)+':'+(e.isOk?'✓':'✗')).join(' ')
+    };
+    sendToSheets(partRecord,'pr-sheets');
+  }
+  partStartTime=Date.now();
   const {label,cls}=lvlInfo(pct);
   const lvlEl=document.getElementById('pr-lvl'); lvlEl.textContent=label; lvlEl.className='lvl '+cls;
 
@@ -903,10 +1185,25 @@ function showFinalResults(){
   document.getElementById('fr-ok').textContent=totalScore;
   document.getElementById('fr-bad').textContent=totalQ-totalScore;
   document.getElementById('fr-pct').textContent=pct+'%';
+
+  // Duration
+  const elapsed=quizStartTime?Math.floor((Date.now()-quizStartTime)/1000):0;
+  const dur=Math.floor(elapsed/60)+'m '+('0'+(elapsed%60)).slice(-2)+'s';
+  document.getElementById('fr-time').textContent=dur;
+
   const{label,cls}=lvlInfo(pct);
   const titles=pct===100?'¡Prueba perfecta! 🏆':pct>=85?'¡Excelente desempeño! 🎉':pct>=70?'¡Muy buen trabajo! 👍':pct>=50?'Sigue practicando 💪':'Necesitas reforzar 📖';
   document.getElementById('fr-ttl').textContent=titles;
   const flvl=document.getElementById('fr-lvl'); flvl.textContent=label; flvl.className='flvl '+cls;
+
+  // Student banner
+  if(studentName){
+    const banner=document.getElementById('fr-st-banner');
+    banner.style.display='flex';
+    document.getElementById('fr-st-name').textContent=studentName;
+    const meta=[studentGrado?'Grado: '+studentGrado:'',studentCode?'Código: '+studentCode:''].filter(Boolean).join('  ·  ');
+    document.getElementById('fr-st-meta').textContent=meta;
+  }
 
   // Breakdown
   const bkdn=document.getElementById('fr-bkdn'); bkdn.innerHTML='';
@@ -945,6 +1242,46 @@ function showFinalResults(){
     const div=document.createElement('div'); div.className='rec';
     div.innerHTML='<span class="ri">🚀</span><div><strong>¡Sigue así!</strong>Tu desempeño es sólido. Repite para reforzar los temas con errores.</div>';
     frecs.appendChild(div);
+  }
+
+  // ── Send final summary to Google Sheets ──
+  if(studentName && SHEETS_ENDPOINT){
+    const MOD_NAME={mecanica:'Mecánica',calor:'Calor y Temperatura',sonido:'Sonido',electro:'Electricidad y Magnetismo'};
+    const record={
+      timestamp : new Date().toISOString(),
+      nombre    : studentName,
+      codigo    : studentCode||'',
+      grado     : studentGrado||'',
+      modulo    : MOD_NAME[activeModule]||activeModule,
+      prueba    : 'RESUMEN FINAL — '+allParts.length+' prueba(s)',
+      preguntas : totalQ,
+      correctas : totalScore,
+      porcentaje: pct,
+      nivel     : label,
+      duracion  : dur,
+      detalle   : temaScores.map(({t,pct:tp})=>'T'+t+':'+tp+'%').join(' | ')
+    };
+    sendToSheets(record,'fr-sheets');
+  }
+}
+
+// ─── SEND TO GOOGLE SHEETS ───────────────────────────────────────────────────
+async function sendToSheets(record, elId){
+  const el=document.getElementById(elId||'fr-sheets');
+  const ep=SHEETS_ENDPOINT;
+  if(!ep){if(el)el.className='sheets-status hidden';return;}
+  if(el){el.className='sheets-status loading';el.innerHTML='&#128196; Registrando en Google Sheets&hellip;';}
+  try{
+    await fetch(ep,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify(record)
+    });
+    if(el){el.className='sheets-status ok';el.innerHTML='&#10003; Resultado guardado en Google Sheets';}
+  }catch(err){
+    if(el){el.className='sheets-status error';el.innerHTML='&#9888; No se pudo conectar. El resultado queda visible en pantalla.';}
+    console.warn('Sheets error:',err);
   }
 }
 
