@@ -241,8 +241,10 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 .reg-card .reg-sub{font-size:.78rem;color:var(--mut);margin-bottom:14px;}
 .st-fld{margin-bottom:12px;}
 .st-fld label{display:block;font-size:.78rem;font-weight:600;color:var(--txt);margin-bottom:5px;}
-.st-fld input{width:100%;padding:9px 12px;border:1.5px solid var(--bdr);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .15s;}
-.st-fld input:focus{border-color:var(--pri);}
+.st-fld input,.st-fld select{width:100%;padding:9px 12px;border:1.5px solid var(--bdr);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border .15s;background:#fff;appearance:none;-webkit-appearance:none;}
+.st-fld input:focus,.st-fld select:focus{border-color:var(--pri);}
+.st-fld .sel-wrap{position:relative;}
+.st-fld .sel-wrap::after{content:"▾";position:absolute;right:11px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--mut);font-size:.85rem;}
 .st-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .reg-act{display:flex;justify-content:flex-end;margin-top:14px;}
 /* Registered badge (replaces form after login) */
@@ -303,7 +305,14 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
       </div>
       <div class="st-fld">
         <label>Grado / Grupo *</label>
-        <input type="text" id="st-grado" placeholder="Ej. 11-A"/>
+        <div class="sel-wrap">
+          <select id="st-grado">
+            <option value="">— Selecciona —</option>
+            <option value="11°-A">11°-A</option>
+            <option value="11°-B">11°-B</option>
+            <option value="11°-C">11°-C</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="reg-act">
