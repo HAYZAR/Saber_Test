@@ -1197,7 +1197,7 @@ function showPartResults(){
 function continueQuiz(){
   currentPart++;
   if(currentPart>=allParts.length) showFinalResults();
-  else renderQ();
+  else { show('screen-quiz'); renderQ(); }
 }
 
 // ─── FINAL RESULTS ────────────────────────────────────────────────────────────
